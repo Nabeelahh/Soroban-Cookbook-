@@ -8,7 +8,7 @@ pub struct AuthContextContract;
 #[contractimpl]
 impl AuthContextContract {
     /// Returns the address of the invoker of this function.
-    /// In Soroban, the standard way to retrieve and authenticate an invoker 
+    /// In Soroban, the standard way to retrieve and authenticate an invoker
     /// is by passing their `Address` as an argument and requiring their authorization.
     pub fn get_invoker(_env: Env, invoker: Address) -> Address {
         // This ensures the invoker has authorized this contract call
@@ -25,7 +25,7 @@ impl AuthContextContract {
     pub fn admin_only_op(_env: Env, invoker: Address, expected_admin: Address) -> bool {
         // Enforce that the provided invoker is indeed the authorized caller
         invoker.require_auth();
-        
+
         // Security check: only allow if the invoker matches the expected admin
         if invoker == expected_admin {
             // Admin-only logic would go here
@@ -51,11 +51,11 @@ impl ProxyContract {
     pub fn proxy_call(env: Env, target_contract: Address, user: Address) -> Address {
         // The proxy must first authenticate the user
         user.require_auth();
-        
+
         // We create a client to call the target contract
         let client = AuthContextContractClient::new(&env, &target_contract);
-        
-        // When we call the target contract, we pass the user's address. 
+
+        // When we call the target contract, we pass the user's address.
         // Because the target contract calls `user.require_auth()`, the SDK will
         // verify that the user authorized the entire call chain (User -> Proxy -> Target).
         client.get_invoker(&user)
