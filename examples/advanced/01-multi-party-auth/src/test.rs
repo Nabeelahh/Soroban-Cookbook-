@@ -248,14 +248,14 @@ fn test_sequential_auth_escrow_unauthorized_step2() {
     client.sequential_auth_escrow(&buyer, &seller, &1000i128);
 
     // Step 2: Remove mock auths so the joint release fails
-    // In soroban test framework, `env.mock_all_auths_allowing_non_root_auth()` or just creating a new mock state is not directly available to *unmock*, 
+    // In soroban test framework, `env.mock_all_auths_allowing_non_root_auth()` or just creating a new mock state is not directly available to *unmock*,
     // but we can just use another test environment or call the client directly.
-    // Actually, `mock_all_auths` applies to all subsequent calls in the same `Env`. 
-    // To test unauthorized step 2, we can just jump to step 2 with mock_all_auths in one environment, 
-    // but wait, we can't easily jump to step 2. 
+    // Actually, `mock_all_auths` applies to all subsequent calls in the same `Env`.
+    // To test unauthorized step 2, we can just jump to step 2 with mock_all_auths in one environment,
+    // but wait, we can't easily jump to step 2.
     // We can clear auths by not calling mock_all_auths in a fresh env, but step 2 requires step 1 to have happened.
     // Instead of doing it this way, let's use `env.set_auths(&[])` which effectively overrides and fails.
     env.set_auths(&[]);
-    
+
     client.sequential_auth_escrow(&buyer, &seller, &1000i128);
 }
