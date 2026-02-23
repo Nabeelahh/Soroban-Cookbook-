@@ -1,7 +1,7 @@
 #![no_std]
 
 use soroban_sdk::{
-    contract, contracterror, contractimpl, symbol_short, vec, Address, Env, Symbol, Vec,
+    contract, contracterror, contractimpl, symbol_short, vec, Address, Env, IntoVal, Symbol, Vec,
 };
 
 /// Authentication Patterns Contract
@@ -225,13 +225,8 @@ impl AuthContract {
         // In a real scenario, this would be used to call other contracts
         // or to prove the contract's identity for cross-contract operations
         true
-use soroban_sdk::{contract, contractimpl, symbol_short, Address, Env, IntoVal};
+    }
 
-#[contract]
-pub struct AuthContract;
-
-#[contractimpl]
-impl AuthContract {
     /// Demonstrates basic address-based authentication.
     /// Only the 'user' can successfully call this function.
     pub fn secure_action(env: Env, user: Address) {

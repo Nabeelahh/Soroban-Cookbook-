@@ -7,7 +7,7 @@
 
 use super::*;
 use soroban_sdk::{symbol_short, Address, Env};
-use soroban_sdk::testutils::Address as _;
+use soroban_sdk::testutils::{Address as _, AuthorizedFunction};
 
 #[test]
 fn test_basic_auth_success() {
@@ -251,14 +251,6 @@ fn test_multiple_auth_patterns() {
     let retrieved_data = client.get_user_data(&user1);
     assert_eq!(retrieved_data, Some(data));
 }
-#![cfg(test)]
-extern crate std;
-
-use super::*;
-use soroban_sdk::{
-    testutils::{Address as _, AuthorizedFunction},
-    vec, Address, Env, IntoVal, Symbol,
-};
 
 #[test]
 fn test_auth_success() {
